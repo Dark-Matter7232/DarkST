@@ -15,5 +15,8 @@ The core changes are
 - clipboard fix
 - w3m support
 - transparency
+- scrollback
+- copy command output(from luke's build of st)
+- copy url(from luke's build of st)
 
 As of now, it contains only suckless code with suckless.org patches and now instantOS specific features

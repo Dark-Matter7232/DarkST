@@ -238,21 +238,18 @@ ResourcePref resources[] = {
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
+const unsigned int mousescrollincrement = 1;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+	{ XK_ANY_MOD,           Button4, kscrollup,      {.i =  mousescrollincrement} },
+	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i =  mousescrollincrement} },	
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
-static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler", "externalpipe", NULL };
 
-static char *copyurlcmd[] = { "/bin/sh", "-c",
-    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-~]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
-    "externalpipe", NULL };
-
-static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
@@ -274,9 +271,10 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
+	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },	
 };
 
 /*

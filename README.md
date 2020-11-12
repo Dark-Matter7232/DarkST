@@ -1,6 +1,6 @@
-# instantOS st
+# DarkSt
 
-this st fork is the default terminal emulator being used in instantOS
+St fork based on instantos-st
 It is nothing special, it really just gets the job done which is what a default terminal should do. 
 The core changes are
 - xresources support
@@ -19,4 +19,3 @@ The core changes are
 - copy command output(from luke's build of st)
 - copy url(from luke's build of st)
 
-As of now, it contains only suckless code with suckless.org patches and now instantOS specific features
